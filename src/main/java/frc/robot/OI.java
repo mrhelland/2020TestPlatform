@@ -70,41 +70,15 @@ public class OI {
 
         assistController = new XboxController(RobotMap.AssistController);
 
-        climbDownButton = new JoystickButton(assistController, 7);
-        climbDownButton.whileHeld(new ManualClimb(false));
-        climbUpButton = new JoystickButton(assistController, 6);
-        climbUpButton.whileHeld(new ManualClimb(true));
-        controlPanelSpinButton = new JoystickButton(assistController, 5);
-        controlPanelSpinButton.whenPressed(new ControlPanelSpin());
-        controlPanelSetColorButton = new JoystickButton(assistController, 4);
-        controlPanelSetColorButton.whenPressed(new ControlPanelSetColor());
-        intakeBallButton = new JoystickButton(assistController, 3);
-        intakeBallButton.whenPressed(new IntakeRollerSpin());
-        lineupButton = new JoystickButton(assistController, 2);
-        lineupButton.whenPressed(new LineupToShoot());
         shootButton = new JoystickButton(assistController, 1);
         //shootButton.whileHeld(new ShootBall());
         shootButton.whileHeld(new TestShooterSpeeds());
         driverContoller = new XboxController(0);
 
         speedoButton = new JoystickButton(driverContoller, 1);
-        speedoButton.whileHeld(new ManualDrive());
 
 
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-        SmartDashboard.putData("ManualDrive", new ManualDrive());
-        SmartDashboard.putData("AutoDriveForward", new AutoDriveForward());
-        SmartDashboard.putData("AutoDriveTurnLeft", new AutoDriveTurn(90));
-        SmartDashboard.putData("AutoDriveTurnRight", new AutoDriveTurn(-90));
-
-        SmartDashboard.putData("ManualClimbDown", new ManualClimb(false));
-        SmartDashboard.putData("ManualClimbUp", new ManualClimb(true));
-        SmartDashboard.putData("ControlPanelSetColor", new ControlPanelSetColor());
-        SmartDashboard.putData("ControlPanelSpin", new ControlPanelSpin());
-        SmartDashboard.putData("IntakeRollerSpin", new IntakeRollerSpin());
-        SmartDashboard.putData("IntakeTrackUp", new IntakeTrackUp());
-        SmartDashboard.putData("LineupToShoot", new LineupToShoot());
         //SmartDashboard.putData("ShootBall", new ShootBall());
         SmartDashboard.putData("TestShooterSpeeds", new TestShooterSpeeds());
 

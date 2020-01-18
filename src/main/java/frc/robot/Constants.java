@@ -16,6 +16,13 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
+
+    public static double BALLSHOOT_P = 1.0;
+    public static double BALLSHOOT_I = 0.0;
+    public static double BALLSHOOT_D = 0.0;
+    public static double BALLSHOOT_ENCODER_CONSTANT = 1.0;
+
+
     public static Double BallPIDTolerance = 0d;
     
     /*----------BallSystem----------*/
