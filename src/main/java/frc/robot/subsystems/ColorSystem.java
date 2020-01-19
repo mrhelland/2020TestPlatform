@@ -13,11 +13,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.util.Color;
-
 import com.revrobotics.ColorSensorV3;
-
-import edu.wpi.first.wpilibj.AnalogInput;
-
 
 /**
  *
@@ -26,25 +22,52 @@ public class ColorSystem extends SubsystemBase {
 
     private final ColorSensorV3 colorSensor = new ColorSensorV3(Constants.COLORSENSOR_I2C);
 
-    //private double testRotations;
+    private Color prevColor;
+    private Color currentColor;
+    private int consistentCount;
+    private int inconsistentCount;
 
 
     public ColorSystem() {      
-
+        prevColor = Color.kBlack;
+        currentColor = Color.kWhite;
     }
 
     public Color getColor() {
-        return colorSensor.getColor();
+
+        return currentColor;
+    }
+
+    public double getConsistency() {
+        return (double)consistentCount / (double)(consistentCount + inconsistentCount);
     }
 
     public double getInfraRed() {
         return colorSensor.getIR();
     }
 
-    public String getRGB() {
+    public String getStringRGB() {
         return "R:" + colorSensor.getRed() + " G:" + colorSensor.getGreen() + " B:" + colorSensor.getBlue();
     }
 
+    @Override
+    public void periodic() {
+        currentColor = colorSensor.getColor();
+        prevColor = currentColor;
+        isSimilar(prevColor, currentColor);
+    }
 
+    private boolean isSimilar(Color a, Color b) {
+        if( Math.abs(a.red - b.red) < Constants.COLORCHANNELTOLERANCE && 
+            Math.abs(a.green - b.green) < Constants.COLORCHANNELTOLERANCE &&
+            Math.abs(a.blue - b.blue) < Constants.COLORCHANNELTOLERANCE ) 
+        {
+            consistentCount++;
+            return true;
+        } else {
+           inconsistentCount++;
+            return false;
+       }
+    }
 }
 
