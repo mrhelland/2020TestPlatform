@@ -40,12 +40,12 @@ public class MotorSystem extends SubsystemBase {
         SendableRegistry.add(controllerA, "Motor A");
         SendableRegistry.add(controllerB, "Motor B");
 
-        speedEncoderA = new Encoder(Constants.MotorSpeedEncoderA, Constants.MotorSpeedEncoderB, false, EncodingType.k4X);
+        speedEncoderA = new Encoder(Constants.MotorA_EncoderA, Constants.MotorA_EncoderB, false, EncodingType.k4X);
         SendableRegistry.add(speedEncoderA, "Encoder A");
         speedEncoderA.setDistancePerPulse(Constants.MOTOR_ENCODER_MULTIPLIER);
         speedEncoderA.setSamplesToAverage(4);
 
-        speedEncoderB = new Encoder(Constants.MotorSpeedEncoderA, Constants.MotorSpeedEncoderB, false, EncodingType.k4X);
+        speedEncoderB = new Encoder(Constants.MotorB_EncoderA, Constants.MotorA_EncoderB, false, EncodingType.k4X);
         SendableRegistry.add(speedEncoderB, "Encoder B");
         speedEncoderB.setDistancePerPulse(Constants.MOTOR_ENCODER_MULTIPLIER);
         speedEncoderB.setSamplesToAverage(4);
