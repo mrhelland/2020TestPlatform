@@ -39,7 +39,11 @@ public class ColorSystem extends SubsystemBase {
     }
 
     public double getConsistency() {
-        return (double)consistentCount / (double)(consistentCount + inconsistentCount);
+        if(consistentCount + inconsistentCount == 0) {
+            return 1.0;
+        } else {
+            return (double)consistentCount / (double)(consistentCount + inconsistentCount);
+        }
     }
 
     public double getInfraRed() {

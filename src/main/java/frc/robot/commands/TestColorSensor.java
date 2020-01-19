@@ -11,8 +11,6 @@ import frc.robot.Robot;
  */
 public class TestColorSensor extends CommandBase {
 
-    private int consistencyCount;
-    private Color currentColor;
 
     public TestColorSensor() {
 
@@ -21,17 +19,15 @@ public class TestColorSensor extends CommandBase {
     // Called just before this Command runs the first time
     @Override
     public void initialize() {
-        consistencyCount = 0;
-        SmartDashboard.putNumber("Consistency:", consistencyCount);
-        SmartDashboard.putString("Current Color:", currentColor.toString());
+        SmartDashboard.putNumber("Consistency:", Robot.colorSystem.getConsistency());
+        SmartDashboard.putString("Current Color:", Robot.colorSystem.getColor().toString());
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        currentColor = Robot.colorSystem.getColor();
-        SmartDashboard.putNumber("Consistency:", consistencyCount);
-        SmartDashboard.putString("Current Color:", currentColor.toString());
+        SmartDashboard.putNumber("Consistency:", Robot.colorSystem.getConsistency());
+        SmartDashboard.putString("Current Color:", Robot.colorSystem.getColor().toString());
     }
 
     // Make this return true when this Command no longer needs to run execute()
