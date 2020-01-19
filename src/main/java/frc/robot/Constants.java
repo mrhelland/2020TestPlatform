@@ -7,6 +7,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.I2C;
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants.  This class should not be used for any other purpose.  All constants should be
@@ -17,40 +18,25 @@ package frc.robot;
  */
 public final class Constants {
 
-    public static double BALLSHOOT_P = 1.0;
-    public static double BALLSHOOT_I = 0.0;
-    public static double BALLSHOOT_D = 0.0;
-    public static double BALLSHOOT_ENCODER_CONSTANT = 1.0;
-
-
-    public static Double BallPIDTolerance = 0d;
-    
-    /*----------BallSystem----------*/
+    //Motor Testing
+    public static double MOTORS_P = 1.0;
+    public static double MOTORS_I = 0.0;
+    public static double MOTOR_D = 0.0;
+    public static double MOTOR_ENCODER_MULTIPLIER = 1.0;
 
     //Booleans, Integers, and Values
 
     
     //Motors                                        Motor #s 0, 1, 2, 3, 4, 5, 6, 7,
-    public static int TopBallMotorID = 1;
-    public static int BottomBallMotorID = 2;
-    public static int QueBallMotorID = 3;
-    public static int TrackMotorAID = 4;
-	public static int TrackMotorBID = 5;
-    public static int IntakeMotorAID = 6;
-	public static int IntakeMotorBID = 7;
+    public static int MOTORA_ID = 1;
+    public static int MOTORB_ID = 2;
+
 
     //Sensors                                       Sensor #s 0, 1, 2
     public static int BallLimitID = 0;
     public static int BallSpeedEncoderAID = 1;
     public static int BallSpeedEncoderBID = 2;
-	
-    /*----------ClimbSystem----------*/
-
-    //Booleans, Integers, and Values
-
-
-    //Motors                                        Motor #s 8
-    public static int ClimbMotorID = 8;
+    public final static I2C.Port COLORSENSOR_I2C = I2C.Port.kOnboard;
 
     //Sensors                                       Sensor #s 3, 4
     public static int MaxHeightLimitID = 3;

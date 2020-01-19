@@ -1,5 +1,10 @@
 package frc.robot.commands;
+
+import com.revrobotics.ColorSensorV3;
+
+import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.util.Color;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 //import frc.robot.Robot;
 import frc.robot.Robot;
@@ -7,34 +12,29 @@ import frc.robot.Robot;
 /**
  *
  */
-public class TestShooterSpeeds extends CommandBase {
+public class TestColorSensor extends CommandBase {
 
-    private double topSpeed;
-    private double bottomSpeed;
+    private int consistencyCount;
+    private String currentColor;
 
-    public TestShooterSpeeds() {
-        topSpeed = 0.5;
-        bottomSpeed = 0.5;
-    }
+    public TestColorSensor() {
 
-    public TestShooterSpeeds(double top, double bottom) {
-        topSpeed = top;   
-        bottomSpeed = bottom; 
     }
 
     // Called just before this Command runs the first time
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("Top_Motor_Speed", topSpeed);
-        SmartDashboard.putNumber("Bottom_Motor_Speed", bottomSpeed);
+        consistencyCount = 0;
+        SmartDashboard.putNumber("Consistency:", consistencyCount);
+        SmartDashboard.putString("Current Color:", currentColor);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        topSpeed = SmartDashboard.getNumber("Top_Motor_Speed", 0);
-        bottomSpeed = SmartDashboard.getNumber("Bottom_Motor_Speed", 0);
-        Robot.ballSystem.setShooterSpeed(topSpeed, bottomSpeed);
+        currentColor = Robot.colorSystem.getRGB();
+        SmartDashboard.putNumber("Consistency:", consistencyCount);
+        SmartDashboard.putString("Current Color:", currentColor);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +46,7 @@ public class TestShooterSpeeds extends CommandBase {
     // Called once after isFinished returns true
     @Override
     public void end(boolean interrupted) {
-        Robot.ballSystem.setShooterSpeed(0, 0);
+        Robot.motorSystem.setShooterSpeed(0, 0);
     }
 
 
