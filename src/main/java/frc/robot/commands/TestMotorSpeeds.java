@@ -34,7 +34,7 @@ public class TestMotorSpeeds extends CommandBase {
     public void execute() {
         topSpeed = SmartDashboard.getNumber("Top_Motor_Speed", 0);
         bottomSpeed = SmartDashboard.getNumber("Bottom_Motor_Speed", 0);
-        Robot.motorSystem.setShooterSpeed(topSpeed, bottomSpeed);
+        Robot.motorSystem.setMotorSpeed(topSpeed, bottomSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -46,7 +46,7 @@ public class TestMotorSpeeds extends CommandBase {
     // Called once after isFinished returns true
     @Override
     public void end(boolean interrupted) {
-        Robot.motorSystem.setShooterSpeed(0, 0);
+        Robot.motorSystem.setMotorSpeed(0, 0);
     }
 
 
