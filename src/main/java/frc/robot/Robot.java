@@ -113,23 +113,23 @@ public class Robot extends TimedRobot {
         CommandScheduler.getInstance().run();
     }
 
+    CommandBase testMotors = new TestMotorSpeeds();
+    CommandBase testColors = new TestColorSensor();
     @Override
     public void testInit() {
         // This makes sure that the autonomous stops running when
         // teleop starts running. If you want the autonomous to
         // continue until interrupted by another command, remove
         // this line or comment it out.
-        CommandBase testMotors = new TestMotorSpeeds();
-        CommandBase testColors = new TestColorSensor();
-        testMotors.schedule();
-        testColors.schedule();
+        testMotors = new TestMotorSpeeds();
+        testColors = new TestColorSensor();
         SmartDashboard.putData("Test Motor Speeds", testMotors);
         SmartDashboard.putData("Test Color Sensor", testColors);
         ShuffleboardTab testtab = Shuffleboard.getTab("Test2020");
         testtab.add(testMotors);
         testtab.add(testColors);
-        
-
+        testMotors.schedule();
+        testColors.schedule();
     }
 
     /**
@@ -137,6 +137,7 @@ public class Robot extends TimedRobot {
      */
     @Override
     public void testPeriodic() {
+        
         CommandScheduler.getInstance().run();
     }
 }
