@@ -9,32 +9,40 @@ import frc.robot.Robot;
  */
 public class TestMotorSpeeds extends CommandBase {
 
-    private double topSpeed;
-    private double bottomSpeed;
+    private double speedA;
+    private double speedB;
 
     public TestMotorSpeeds() {
-        topSpeed = 0.5;
-        bottomSpeed = 0.5;
+        speedA = 0.5;
+        speedB = 0.5;
     }
 
-    public TestMotorSpeeds(double top, double bottom) {
-        topSpeed = top;   
-        bottomSpeed = bottom; 
+    public TestMotorSpeeds(double top, double bottom) {   
+        speedA = top;   
+        speedB = bottom; 
+        SmartDashboard.putNumber("Motor_Speed_A", speedA);
+        SmartDashboard.putNumber("Motor_Speed_B", speedB);
     }
 
     // Called just before this Command runs the first time
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("Top_Motor_Speed", topSpeed);
-        SmartDashboard.putNumber("Bottom_Motor_Speed", bottomSpeed);
+        // SmartDashboard.putNumber("Top_Motor_Speed", topSpeed);
+        // SmartDashboard.putNumber("Bottom_Motor_Speed", bottomSpeed);
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        topSpeed = SmartDashboard.getNumber("Top_Motor_Speed", 0);
-        bottomSpeed = SmartDashboard.getNumber("Bottom_Motor_Speed", 0);
-        Robot.motorSystem.setMotorSpeed(topSpeed, bottomSpeed);
+        double a,b;
+
+        a = SmartDashboard.getNumber("Motor_Speed_A", 0);
+        b = SmartDashboard.getNumber("Motor_Speed_B", 0);
+        if(a != speedA) speedA = a;
+        if(b != speedB) speedB = b;
+
+        Robot.motorSystem.setMotorSpeed(speedA, speedB);
+        
     }
 
     // Make this return true when this Command no longer needs to run execute()

@@ -73,7 +73,7 @@ public class MotorSystem extends SubsystemBase {
   
     public void setMotorSpeed(double speedA, double speedB) {
         controllerA.setReference(speedA, ControlType.kVelocity);
-        controllerA.setReference(speedA, ControlType.kVelocity);
+        controllerB.setReference(speedB, ControlType.kVelocity);
     }
 
     @Override
