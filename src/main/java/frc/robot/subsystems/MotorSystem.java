@@ -29,13 +29,16 @@ public class MotorSystem extends SubsystemBase {
 
     private CANPIDController controllerA;
     private CANPIDController controllerB;
-    private double kP_A, kP_B, kI_A, kI_B, kD_A, kD_B;
+    private double kP_A, kP_B, kI_A, kI_B, kD_A, kD_B, kIz_A, kIz_B, kFf_A, kFf_B;
     private double speedA, speedB;
 
     public MotorSystem() {
         kP_A = kP_B = Constants.MOTORS_P;
         kI_A = kI_B = Constants.MOTORS_I;
         kD_A = kD_B = Constants.MOTORS_D;
+        kIz_A = kIz_B = Constants.MOTORS_Iz;
+        kFf_A = kFf_B = Constants.MOTORS_Ff;
+        
 
         speedA = speedB = 0;
 
@@ -47,6 +50,8 @@ public class MotorSystem extends SubsystemBase {
         controllerA.setP(kP_A);
         controllerA.setI(kI_A);
         controllerA.setD(kD_A);
+        controllerA.setIZone(kIz_A);
+        controllerA.setFF(kFf_A);
         controllerA.setOutputRange(-1, 1);
         SmartDashboard.putNumber("MotorA: P Gain", kP_A);
         SmartDashboard.putNumber("MotorA: I Gain", kI_A);
@@ -64,6 +69,8 @@ public class MotorSystem extends SubsystemBase {
         controllerB.setP(kP_B);
         controllerB.setI(kI_B);
         controllerB.setD(kD_B);
+        controllerA.setIZone(kIz_B);
+        controllerA.setFF(kFf_B);
         controllerB.setOutputRange(-1, 1);
         SmartDashboard.putNumber("MotorB: P Gain", kP_B);
         SmartDashboard.putNumber("MotorB: I Gain", kI_B);
@@ -77,8 +84,8 @@ public class MotorSystem extends SubsystemBase {
     }
   
     public void setMotorSpeed(double speedA, double speedB) {
-        controllerA.setReference(speedA, ControlType.kVelocity);
-        controllerB.setReference(speedB, ControlType.kVelocity);
+        controllerA.setReference(speedA*Constants.MAXRPM, ControlType.kVelocity);
+        controllerB.setReference(speedB*Constants.MAXRPM, ControlType.kVelocity);
     }
 
     @Override

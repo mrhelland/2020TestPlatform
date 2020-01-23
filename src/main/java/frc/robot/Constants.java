@@ -26,9 +26,12 @@ public final class Constants {
     public final static I2C.Port COLORSENSOR_I2C = I2C.Port.kOnboard;
 
     // Defined Constants
-    public static double MOTORS_P = 1.0;
-    public static double MOTORS_I = 0.0;
+    public static double MOTORS_P = 0.00005;
+    public static double MOTORS_I = 0.000001;
     public static double MOTORS_D = 0.0;
+    public static double MOTORS_Iz = 0;
+    public static double MOTORS_Ff = 0;
+    public static double MAXRPM = 5700;
 
     public final static double COLORCHANNELTOLERANCE = 0.1;
 
