@@ -106,7 +106,7 @@ public class MotorSystem extends SubsystemBase {
         if(i != kI_A)
             controllerA.setI(i);
         if(d != kD_A)
-            controllerA.setI(d);
+            controllerA.setD(d);
         if(speed != speedA) speedA = speed;
 
         // get and update all SmartDashboard values for MotorB
@@ -119,7 +119,7 @@ public class MotorSystem extends SubsystemBase {
         if(i != kI_B)
             controllerB.setI(i);
         if(d != kD_B)
-            controllerB.setI(d);
+            controllerB.setD(d);
         if(speed != speedB) speedB = speed;
 
         // update the SmartDashboard with current velocity
