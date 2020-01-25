@@ -19,14 +19,14 @@ public class TestColorSensor extends CommandBase {
     // Called just before this Command runs the first time
     @Override
     public void initialize() {
-        SmartDashboard.putNumber("Consistency:", Robot.colorSystem.getConsistency());
+        SmartDashboard.putNumber("Consistency Rate:", Robot.colorSystem.getConsistency());
         SmartDashboard.putString("Current Color:", Robot.colorSystem.getColor().toString());
     }
 
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        SmartDashboard.putNumber("Consistency:", Robot.colorSystem.getConsistency());
+        SmartDashboard.putNumber("Consistency Rate:", Robot.colorSystem.getConsistency());
         SmartDashboard.putString("Current Color:", Robot.colorSystem.getColor().toString());
     }
 

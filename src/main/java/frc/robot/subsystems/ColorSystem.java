@@ -31,19 +31,16 @@ public class ColorSystem extends SubsystemBase {
     public ColorSystem() {      
         prevColor = Color.kBlack;
         currentColor = Color.kWhite;
+        consistentCount = 0;
+        inconsistentCount = 1;
     }
 
     public Color getColor() {
-
         return currentColor;
     }
 
     public double getConsistency() {
-        if(consistentCount + inconsistentCount == 0) {
-            return 1.0;
-        } else {
-            return (double)consistentCount / (double)(consistentCount + inconsistentCount);
-        }
+        return (double)consistentCount / (double)(consistentCount + inconsistentCount);
     }
 
     public double getInfraRed() {
@@ -57,21 +54,25 @@ public class ColorSystem extends SubsystemBase {
     @Override
     public void periodic() {
         currentColor = colorSensor.getColor();
-        prevColor = currentColor;
         isSimilar(prevColor, currentColor);
+        prevColor = currentColor;
     }
 
     private boolean isSimilar(Color a, Color b) {
+        if(consistentCount + inconsistentCount > 10000) {
+            consistentCount = consistentCount / 10;
+            inconsistentCount = inconsistentCount / 10;
+        }
         if( Math.abs(a.red - b.red) < Constants.COLORCHANNELTOLERANCE && 
             Math.abs(a.green - b.green) < Constants.COLORCHANNELTOLERANCE &&
             Math.abs(a.blue - b.blue) < Constants.COLORCHANNELTOLERANCE ) 
         {
             consistentCount++;
             return true;
-        } else {
-           inconsistentCount++;
-            return false;
-       }
+        }
+
+        inconsistentCount++;
+        return false;
     }
 }
 
