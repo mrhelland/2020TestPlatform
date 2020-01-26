@@ -22,8 +22,8 @@ public final class Constants {
     public static int CLIMBERPOTID = 8;
 
     // CAN Channels
-    public static int MOTORA_ID = 0;
-    public static int MOTORB_ID = 1;
+    public static int MOTORA_ID = 2;
+    public static int MOTORB_ID = 3;
 
     // I2C Ports
     public final static I2C.Port COLORSENSOR_I2C = I2C.Port.kOnboard;

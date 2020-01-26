@@ -56,8 +56,8 @@ public class MotorSystem extends SubsystemBase {
         controllerB.setP(kP_B);
         controllerB.setI(kI_B);
         controllerB.setD(kD_B);
-        controllerA.setIZone(kIz_B);
-        controllerA.setFF(kFf_B);
+        controllerB.setIZone(kIz_B);
+        controllerB.setFF(kFf_B);
         controllerB.setOutputRange(-1, 1);
 
         //obtain encoders from motor controllers
@@ -85,42 +85,45 @@ public class MotorSystem extends SubsystemBase {
      * @param speedA A value from -1 to 1
      * @param speedB A value from -1 to 1
      */
-    public void setMotorRPM(double speedA, double speedB) {
-        controllerA.setReference(speedA*Constants.MAXRPM, ControlType.kVelocity);
-        controllerB.setReference(speedB*Constants.MAXRPM, ControlType.kVelocity);
+    public void setMotorRPM(double SpeedA, double SpeedB) {
+        controllerA.setReference(SpeedA*Constants.MAXRPM, ControlType.kVelocity);
+        controllerB.setReference(SpeedB*Constants.MAXRPM, ControlType.kVelocity);
     }
 
 
     @Override
     public void periodic() {
-        double p, i, d, speed;
 
         // get and update all SmartDashboard values for MotorA
-        p = SmartDashboard.getNumber("MotorA: P Gain", 0);
-        i = SmartDashboard.getNumber("MotorA: I Gain", 0);
-        d = SmartDashboard.getNumber("MotorA: D Gain", 0);
-        speed = SmartDashboard.getNumber("MotorA: Speed Setting", 0);
+        double p_a, i_a, d_a, speed_a;
+        p_a = SmartDashboard.getNumber("MotorA: P Gain", 0);
+        i_a = SmartDashboard.getNumber("MotorA: I Gain", 0);
+        d_a = SmartDashboard.getNumber("MotorA: D Gain", 0);
+        speed_a = SmartDashboard.getNumber("MotorA: Speed Setting", 0);
         
-        if(p != kP_A)
-            controllerA.setP(p);
-        if(i != kI_A)
-            controllerA.setI(i);
-        if(d != kD_A)
-            controllerA.setD(d);
-        if(speed != speedA) speedA = speed;
+        if(p_a != kP_A)
+            controllerA.setP(p_a);
+        if(i_a != kI_A)
+            controllerA.setI(i_a);
+        if(d_a != kD_A)
+            controllerA.setD(d_a);
+        if(speed_a != speedA) 
+            speedA = speed_a;
 
         // get and update all SmartDashboard values for MotorB
-        p = SmartDashboard.getNumber("MotorB: P Gain", 0);
-        i = SmartDashboard.getNumber("MotorB: I Gain", 0);
-        d = SmartDashboard.getNumber("MotorB: D Gain", 0);
-        speed = SmartDashboard.getNumber("MotorB: Speed Setting", 0);
-        if(p != kP_B)
-            controllerB.setP(p);
-        if(i != kI_B)
-            controllerB.setI(i);
-        if(d != kD_B)
-            controllerB.setD(d);
-        if(speed != speedB) speedB = speed;
+        double p_b, i_b, d_b, speed_b;
+        p_b = SmartDashboard.getNumber("MotorB: P Gain", 0);
+        i_b = SmartDashboard.getNumber("MotorB: I Gain", 0);
+        d_b = SmartDashboard.getNumber("MotorB: D Gain", 0);
+        speed_b = SmartDashboard.getNumber("MotorB: Speed Setting", 0);
+        if(p_b != kP_B)
+            controllerB.setP(p_b);
+        if(i_b != kI_B)
+            controllerB.setI(i_b);
+        if(d_b != kD_B)
+            controllerB.setD(d_b);
+        if(speed_b != speedB) 
+            speedB = speed_b;
 
         // update the SmartDashboard with current velocity
         SmartDashboard.putNumber("MotorA: Measured Velocity", speedEncoderA.getVelocity());
