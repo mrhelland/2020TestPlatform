@@ -19,6 +19,9 @@ import edu.wpi.first.wpilibj.I2C;
 public final class Constants {
 
     // PWM Channels
+    public static int CLIMBERPOTID = 8;
+
+    // CAN Channels
     public static int MOTORA_ID = 0;
     public static int MOTORB_ID = 1;
 
@@ -34,6 +37,8 @@ public final class Constants {
     public static double MAXRPM = 5700;
 
     public final static double COLORCHANNELTOLERANCE = 0.1;
+
+    public static double POTENTIOMETERTOINCHES = 40;
 
 
     public static boolean LIMIT_PRESSED = true;
