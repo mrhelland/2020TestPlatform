@@ -65,18 +65,18 @@ public class MotorSystem extends SubsystemBase {
         speedEncoderB = motorB.getEncoder();
 
         //intialize values on the SmartDashboard
-        SmartDashboard.putNumber("MotorA: P Gain", kP_A);
-        SmartDashboard.putNumber("MotorA: I Gain", kI_A);
-        SmartDashboard.putNumber("MotorA: D Gain", kD_A);
-        SmartDashboard.putNumber("MotorA: Speed Setting", speedA);
+        SmartDashboard.putNumber("MotorA P Gain", kP_A);
+        SmartDashboard.putNumber("MotorA I Gain", kI_A);
+        SmartDashboard.putNumber("MotorA D Gain", kD_A);
+        SmartDashboard.putNumber("MotorA Speed Setting", speedA);
 
-        SmartDashboard.putNumber("MotorB: P Gain", kP_B);
-        SmartDashboard.putNumber("MotorB: I Gain", kI_B);
-        SmartDashboard.putNumber("MotorB: D Gain", kD_B);
-        SmartDashboard.putNumber("MotorB: Speed Setting", speedB);
+        SmartDashboard.putNumber("MotorB P Gain", kP_B);
+        SmartDashboard.putNumber("MotorB I Gain", kI_B);
+        SmartDashboard.putNumber("MotorB D Gain", kD_B);
+        SmartDashboard.putNumber("MotorB Speed Setting", speedB);
 
-        SmartDashboard.putNumber("MotorA: Measured Velocity", speedEncoderA.getVelocity());
-        SmartDashboard.putNumber("MotorB: Measured Velocity", speedEncoderB.getVelocity());
+        SmartDashboard.putNumber("MotorA Measured Velocity", speedEncoderA.getVelocity());
+        SmartDashboard.putNumber("MotorB Measured Velocity", speedEncoderB.getVelocity());
       
     }
   
@@ -97,10 +97,10 @@ public class MotorSystem extends SubsystemBase {
         try {
             // get and update all SmartDashboard values for MotorA
             double p_a, i_a, d_a, speed_a;
-            p_a = SmartDashboard.getNumber("MotorA: P Gain", 0);
-            i_a = SmartDashboard.getNumber("MotorA: I Gain", 0);
-            d_a = SmartDashboard.getNumber("MotorA: D Gain", 0);
-            speed_a = SmartDashboard.getNumber("MotorA: Speed Setting", 0);
+            p_a = SmartDashboard.getNumber("MotorA P Gain", 0);
+            i_a = SmartDashboard.getNumber("MotorA I Gain", 0);
+            d_a = SmartDashboard.getNumber("MotorA D Gain", 0);
+            speed_a = SmartDashboard.getNumber("MotorA Speed Setting", 0);
             
             if(p_a != kP_A)
                 controllerA.setP(p_a);
@@ -117,10 +117,10 @@ public class MotorSystem extends SubsystemBase {
         try {
             // get and update all SmartDashboard values for MotorB
             double p_b, i_b, d_b, speed_b;
-            p_b = SmartDashboard.getNumber("MotorB: P Gain", 0);
-            i_b = SmartDashboard.getNumber("MotorB: I Gain", 0);
-            d_b = SmartDashboard.getNumber("MotorB: D Gain", 0);
-            speed_b = SmartDashboard.getNumber("MotorB: Speed Setting", 0);
+            p_b = SmartDashboard.getNumber("MotorB P Gain", 0);
+            i_b = SmartDashboard.getNumber("MotorB I Gain", 0);
+            d_b = SmartDashboard.getNumber("MotorB D Gain", 0);
+            speed_b = SmartDashboard.getNumber("MotorB Speed Setting", 0);
             if(p_b != kP_B)
                 controllerB.setP(p_b);
             if(i_b != kI_B)
@@ -138,8 +138,8 @@ public class MotorSystem extends SubsystemBase {
         updateMotorRPM();
 
         // update the SmartDashboard with current velocity
-        SmartDashboard.putNumber("MotorA: Measured Velocity", speedEncoderA.getVelocity());
-        SmartDashboard.putNumber("MotorB: Measured Velocity", speedEncoderB.getVelocity());
+        SmartDashboard.putNumber("MotorA Measured Velocity", speedEncoderA.getVelocity());
+        SmartDashboard.putNumber("MotorB Measured Velocity", speedEncoderB.getVelocity());
         
     }
 
