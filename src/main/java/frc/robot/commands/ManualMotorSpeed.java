@@ -1,27 +1,24 @@
 package frc.robot.commands;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Constants;
 //import frc.robot.Robot;
 import frc.robot.Robot;
 
 /**
  *
  */
-public class TestMotorSpeeds extends CommandBase {
+public class ManualMotorSpeed extends CommandBase {
 
-    private double speedA;
-    private double speedB;
+    private double speed;
 
-    public TestMotorSpeeds() {
-        speedA = 0.0;
-        speedB = 0.0;
+    public ManualMotorSpeed() {
+        speed = 0.0;
     }
 
-    public TestMotorSpeeds(double SpeedA, double SpeedB) {   
-        speedA = SpeedA;   
-        speedB = SpeedB; 
-        SmartDashboard.putNumber("Motor_Speed_A", speedA);
-        SmartDashboard.putNumber("Motor_Speed_B", speedB);
+    public ManualMotorSpeed(double Speed) {   
+        speed = Speed;   
+        SmartDashboard.putNumber(Constants.DASH_SETSPEED, speed);
     }
 
     // Called just before this Command runs the first time
@@ -34,14 +31,13 @@ public class TestMotorSpeeds extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     @Override
     public void execute() {
-        double a,b;
+        double a;
 
-        a = SmartDashboard.getNumber("Motor_Speed_A", 0);
-        b = SmartDashboard.getNumber("Motor_Speed_B", 0);
-        if(a != speedA) speedA = a;
-        if(b != speedB) speedB = b;
+        a = SmartDashboard.getNumber(Constants.DASH_SETSPEED, 0);
+        if(a != speed) 
+            speed = a;
 
-        Robot.motorSystem.setMotorRPM(speedA, speedB);
+        Robot.motorSystem.setSpeed(speed);
         
     }
 
@@ -54,7 +50,7 @@ public class TestMotorSpeeds extends CommandBase {
     // Called once after isFinished returns true
     @Override
     public void end(boolean interrupted) {
-        Robot.motorSystem.setMotorRPM(0, 0);
+        Robot.motorSystem.setSpeed(0);
     }
 
 

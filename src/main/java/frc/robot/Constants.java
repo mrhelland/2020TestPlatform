@@ -46,4 +46,11 @@ public final class Constants {
 
     public static final double controllerDeadZone = .1;
 
+    public static String DASH_SETSPEED = "Speed Setting";
+    public static String DASH_MEASUREDSPEED = "Measured Speed";
+    public static String DASH_P = "P Setting";
+    public static String DASH_I = "I Setting";
+    public static String DASH_D = "I Setting";
+
+
 }
