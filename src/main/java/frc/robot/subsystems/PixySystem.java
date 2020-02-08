@@ -16,6 +16,8 @@ import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 //import frc.robot.pixy.PixyI2C;
+import io.github.pseudoresonance.pixy2api.*;
+import io.github.pseudoresonance.pixy2api.links.*;
 
 
 /**
@@ -23,16 +25,19 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class PixySystem extends SubsystemBase {
 
-    //private PixyI2C pixy;
+    private final Pixy2 pixy;
 
     public PixySystem() {      
-
+        this(new SPILink());
     }
 
+    public PixySystem(Link link) {
+        pixy = Pixy2.createInstance(link);
+        pixy.init();
+    }
 
-    @Override
-    public void periodic() {
-
+    public Pixy2 getPixy() {
+        return pixy;
     }
 
 }
