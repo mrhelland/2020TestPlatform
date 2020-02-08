@@ -15,7 +15,7 @@ import frc.robot.Constants;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.pixy.PixyI2C;
+//import frc.robot.pixy.PixyI2C;
 
 
 /**
@@ -23,7 +23,7 @@ import frc.robot.pixy.PixyI2C;
  */
 public class PixySystem extends SubsystemBase {
 
-    private PixyI2C pixy;
+    //private PixyI2C pixy;
 
     public PixySystem() {      
 
