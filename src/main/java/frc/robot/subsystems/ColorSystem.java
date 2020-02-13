@@ -14,11 +14,12 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 import edu.wpi.first.wpilibj.util.Color;
 import com.revrobotics.ColorSensorV3;
+import frc.robot.helper.IUpdatesDash;;
 
 /**
  *
  */
-public class ColorSystem extends SubsystemBase {
+public class ColorSystem extends SubsystemBase implements IUpdatesDash {
 
     private final ColorSensorV3 colorSensor = new ColorSensorV3(Constants.COLORSENSOR_I2C);
 
@@ -73,6 +74,12 @@ public class ColorSystem extends SubsystemBase {
 
         inconsistentCount++;
         return false;
+    }
+
+    @Override
+    public void UpdateDashboard() {
+        
+
     }
 }
 

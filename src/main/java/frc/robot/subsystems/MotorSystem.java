@@ -2,6 +2,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.helper.IUpdatesDash;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.CANSparkMax;
@@ -14,7 +15,7 @@ import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 /**
  *
  */
-public class MotorSystem extends SubsystemBase {
+public class MotorSystem extends SubsystemBase implements IUpdatesDash {
 
     private CANEncoder encoder;
     private CANSparkMax motor;
@@ -94,6 +95,12 @@ public class MotorSystem extends SubsystemBase {
     public void periodic() {
         // update the SmartDashboard with current velocity
         SmartDashboard.putNumber(Constants.DASH_MEASUREDSPEED, encoder.getVelocity());  
+    }
+
+    @Override
+    public void UpdateDashboard() {
+        // TODO Auto-generated method stub
+
     }
 
 

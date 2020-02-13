@@ -12,6 +12,7 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import frc.robot.helper.IUpdatesDash;
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -23,7 +24,7 @@ import io.github.pseudoresonance.pixy2api.links.*;
 /**
  *
  */
-public class PixySystem extends SubsystemBase {
+public class PixySystem extends SubsystemBase implements IUpdatesDash {
 
     private final Pixy2 pixy;
 
@@ -38,6 +39,12 @@ public class PixySystem extends SubsystemBase {
 
     public Pixy2 getPixy() {
         return pixy;
+    }
+
+    @Override
+    public void UpdateDashboard() {
+        // TODO Auto-generated method stub
+
     }
 
 }

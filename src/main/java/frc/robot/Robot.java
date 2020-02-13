@@ -12,6 +12,9 @@ package frc.robot;
 
 import edu.wpi.first.hal.FRCNetComm.tInstances;
 import edu.wpi.first.hal.FRCNetComm.tResourceType;
+
+import java.util.ArrayList;
+
 import edu.wpi.first.hal.HAL;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -22,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.*;
+import frc.robot.helper.IUpdatesDash;
 import frc.robot.subsystems.*;
 
 //import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
@@ -43,7 +47,10 @@ public class Robot extends TimedRobot {
     public static OI oi;
         public static ColorSystem colorSystem;
         public static MotorSystem motorSystem;
+        public static PixySystem pixySystem;
+        public static PositionSystem positionSystem;
 
+        ArrayList<IUpdatesDash> subsystems = new ArrayList<IUpdatesDash>();
 
             /**
              * This function is run when the robot is first started up and should be
@@ -54,6 +61,16 @@ public class Robot extends TimedRobot {
 
             colorSystem = new ColorSystem();
             motorSystem = new MotorSystem();
+            pixySystem = new PixySystem();
+            positionSystem = new PositionSystem();
+
+            subsystems.add(colorSystem);
+            subsystems.add(motorSystem);
+
+            for (IUpdatesDash dash : subsystems) {
+                dash.UpdateDashboard();
+            }
+            
 
             // OI must be constructed after subsystems. If the OI creates Commands
             //(which it very likely will), subsystems are not guaranteed to be
