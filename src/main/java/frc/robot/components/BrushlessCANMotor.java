@@ -1,30 +1,22 @@
 package frc.robot.components;
 
-import java.util.ResourceBundle.Control;
-
 import com.revrobotics.CANEncoder;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.ControlType;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
-
-import edu.wpi.first.wpilibj.Sendable;
-import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.smartdashboard.SendableBuilder;
-
 import com.revrobotics.CANPIDController;
+
+import edu.wpi.first.wpilibj.SpeedController;
 
 //import edu.wpi.first.wpilibj.SpeedController;
 import frc.robot.Constants;
 import frc.robot.helper.PIDValues;
 
 public class BrushlessCANMotor implements SpeedController {
-    // private CANEncoder encoder;
-    // private SpeedController speedCont;
     private CANSparkMax motor;
-    // private CANPIDController controller;
     private double value;
     private ControlType controlType;
-    private double maxvalue;
+    private double scaleValue;
     private PIDValues pidValues;
 
     // SpeedController speedController, SpeedController[] speedControllers
@@ -32,9 +24,9 @@ public class BrushlessCANMotor implements SpeedController {
         this(id, Constants.MAXRPM, ControlType.kVelocity, new PIDValues());
     }
 
-    public BrushlessCANMotor(int id, double maxvalue, ControlType controlType, PIDValues pid) {
+    public BrushlessCANMotor(int id, double maxScaleValue, ControlType controlType, PIDValues pid) {
         this.controlType = controlType;
-        this.maxvalue = maxvalue;
+        this.scaleValue = maxScaleValue;
         this.pidValues = pid;
         this.motor = new CANSparkMax(id, MotorType.kBrushless);
         this.motor.restoreFactoryDefaults();
@@ -43,12 +35,12 @@ public class BrushlessCANMotor implements SpeedController {
         updatePID();
     }
 
-    public double getValue() {
-        return value;
-    }
-
     public ControlType getControlType() {
         return controlType;
+    }
+
+    public PIDValues getPIDValues() {
+        return this.pidValues;
     }
 
     public void setPID(PIDValues pid) {
@@ -65,13 +57,13 @@ public class BrushlessCANMotor implements SpeedController {
         controller.setFF(pidValues.Ff);
     }
 
-    public PIDValues getPIDValues() {
-        return this.pidValues;
+    public double getScale() {
+        return this.scaleValue;
     }
 
-
-    public CANEncoder getEncoder() {
-        return motor.getEncoder();
+    public void setScale(double maxScaleValue) {
+        this.scaleValue = maxScaleValue;
+        updateMotor();
     }
 
     public CANSparkMax getMotor() {
@@ -82,30 +74,50 @@ public class BrushlessCANMotor implements SpeedController {
         return this.motor.getPIDController();
     }
 
-    @Override
-    public void set(double value) {
-        this.set(value, false);
+    public CANEncoder getEncoder() {
+        return motor.getEncoder();
     }
 
-    public void set(double value, boolean forcedupdate) {
-        if(value != this.value || forcedupdate) {
-            this.value = value;
-            updateValue();
-        }
+    public double getVelocity() {
+        return motor.getEncoder().getVelocity();
     }
 
-    private void updateValue() {
-        motor.getPIDController().setReference(value * this.maxvalue, this.controlType);
+    public double getPosition() {
+        return motor.getEncoder().getPosition();
     }
 
+    /**
+     * @return The current value of the motor between -1 and 1.
+     */
     @Override
     public double get() {
         return this.value;
     }
 
+    /**
+     * Sets percentage value for the motor dependent on the current ControlType.
+     * @param value A value between -1 and 1.
+     */
     @Override
-    public void setInverted(boolean isInverted) {
-        this.motor.setInverted(isInverted);
+    public void set(double value) {
+        this.set(value, false);
+    }
+
+    /**
+     * Sets percentage value for the motor dependent on the current ControlType.
+     * @param value A value between -1 and 1 that is multipled by the Scale.
+     * @param forcedupdate Update the underlying motor object even if the value has not changed.
+     * @see BrushlessCANMotor#getScale() BrushlessCANMotor.getScale()
+     */ 
+    public void set(double value, boolean forcedupdate) {
+        if(value != this.value || forcedupdate) {
+            this.value = value;
+            updateMotor();
+        }
+    }
+
+    private void updateMotor() {
+        motor.getPIDController().setReference(value * this.scaleValue, this.controlType);
     }
 
     @Override
@@ -114,13 +126,19 @@ public class BrushlessCANMotor implements SpeedController {
     }
 
     @Override
-    public void disable() {
-        this.motor.disable();
+    public void setInverted(boolean isInverted) {
+        this.motor.setInverted(isInverted);
+    }
 
+    @Override
+    public void disable() {
+        this.value = 0;
+        this.motor.disable();
     }
 
     @Override
     public void stopMotor() {
+        this.value = 0;
         this.motor.stopMotor();
     }
 
