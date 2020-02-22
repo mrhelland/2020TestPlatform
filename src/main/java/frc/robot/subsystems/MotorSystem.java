@@ -99,7 +99,12 @@ public class MotorSystem extends SubsystemBase implements IUpdatesDash {
 
     @Override
     public void UpdateDashboard() {
-        // TODO Auto-generated method stub
+        double dashspeed = SmartDashboard.getNumber("Speed", 0);
+        if(dashspeed != this.speed) {
+            this.speed = dashspeed;
+            this.speed = 0.0;
+            SmartDashboard.putNumber("Speed", this.speed);
+        }
 
     }
 
